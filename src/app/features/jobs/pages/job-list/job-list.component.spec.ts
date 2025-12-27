@@ -1,14 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 
 import { JobListComponent } from './job-list.component';
+import { JobService } from '../../../../core/services/job.service';
 
 describe('JobListComponent', () => {
   let component: JobListComponent;
   let fixture: ComponentFixture<JobListComponent>;
 
   beforeEach(async () => {
+    const mockJobService = { getJobs: () => of([]), deleteJob: jasmine.createSpy('deleteJob') };
+
     await TestBed.configureTestingModule({
-      imports: [JobListComponent]
+      declarations: [JobListComponent],
+      providers: [{ provide: JobService, useValue: mockJobService }]
     })
     .compileComponents();
     
