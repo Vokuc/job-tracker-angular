@@ -9,14 +9,16 @@ describe('JobListComponent', () => {
   let fixture: ComponentFixture<JobListComponent>;
 
   beforeEach(async () => {
-    const mockJobService = { getJobs: () => of([]), deleteJob: jasmine.createSpy('deleteJob') };
-
     await TestBed.configureTestingModule({
       declarations: [JobListComponent],
-      providers: [{ provide: JobService, useValue: mockJobService }]
-    })
-    .compileComponents();
-    
+      providers: [
+        {
+          provide: JobService,
+          useValue: { getJobs: () => of([]) }
+        }
+      ]
+    }).compileComponents();
+
     fixture = TestBed.createComponent(JobListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
